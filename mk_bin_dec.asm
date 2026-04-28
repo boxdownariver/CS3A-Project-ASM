@@ -1,5 +1,6 @@
 include(`definitions.asm')
 // Binary to Decimal conversion using virtual slots
+// Should also make a GE style conversion using division... basically, double dabble.
 
 // Decimal number virtual buffer
 @10000
@@ -45,6 +46,7 @@ D=M
 @mk_r_is_zero
 D;JEQ
 // Put inner action here! For each R, do the algorithm on M.
+// Inner action owned by lookup_opt.
 (mk_r_is_zero)
 @mk_bin_dec_iter
 DM=M-1

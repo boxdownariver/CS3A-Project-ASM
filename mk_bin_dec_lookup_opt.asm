@@ -1,3 +1,7 @@
+//
+// UNFINISHED! TODO: complete lookup table
+//
+//
 (mk_lookup_opt)
 // DO m0 Match
 @mk_bin_dec_iter
