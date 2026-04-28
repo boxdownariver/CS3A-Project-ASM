@@ -97,6 +97,8 @@ D=D-1        // 15 is the last one anyway
 D;JEQ
 (mk_m1_return)
 // DO m2 Match
+@mk_mx_x
+M=M+1
 @mk_m2_return      // Set return
 D=A
 @mk_mx_return
@@ -105,13 +107,61 @@ M=D
 D=M
 @mk_lookup_index   // Set index
 M=D
-@7
+@12
 D=A
 @mk_lookup_index
-D=M-D              // Sub 7 from index
-
+D=M-D              // Sub 12 from index
+@mk_mx_set_0
+D;JEQ              // Jump if 12
+D=D+1;JEQ          // and if 11
+D+1;JEQ            // and if 10
+@4
+D=D+A
+@mk_mx_set_0
+D;JLT              // Jump if less than 7
+@mk_mx_set_1
+D;JEQ              // Jump if 7
+@mk_mx_set_2
+D=D-1;JEQ          // Jump if 8
+@mk_mx_set_5
+D=D-1;JEQ          // Jump if 9
+@4
+D=D-A
+@mk_mx_set_1
+D;JEQ              // Jump if 13
+@mk_mx_set_3
+D=D-1;JEQ          // Jump if 14
+@mk_mx_sub_7
+D-1;JEQ            // Jump if 15
 (mk_m2_return)
 // DO m3 Match
+@mk_mx_x           // Setup x for mk_mx
+M=M+1
+@mk_m3_return      // Setup return for mk_mx and mk_lookup_12486
+D=A
+@mk_mx_return
+M=D                // ^^ (mk_mx)
+@mk_lookup_12486_return
+M=D                // ^^ (mk_lookup_12486)
+@mk_lookup_index   // Begin index check: 0, 15. 10-14 are handled by mk_lookup_12486.
+D=M
+@10
+D=D-A
+@mk_mx_set_0
+D;JEQ              // Jump if 0
+@5
+D=D-A
+@mk_mx_sub_2
+D;JEQ              // Jump if 15
+@mk_decBuffer
+D=M
+@10
+D=D-A
+@mk_lookup_m_floater
+M=D
+
+
+(mk_m3_return)
 // DO m4 Match
 @mk_lookup_opt_return
 A=M
@@ -124,7 +174,7 @@ A=M
 (mk_lookup_12486)  // Switch / Match statemest
 @mk_lookup_iterator
 D=M
-@isnt_0            // Zero case : Add 1
+@mk_isnt_0            // Zero case : Add 1
 D;JEQ
 @mk_lookup_m_floater
 A=M
@@ -135,7 +185,7 @@ A=M
 (mk_isnt_0)
 
 D=D-1
-@isnt_1            // One case : Add 2
+@mk_isnt_1            // One case : Add 2
 D;JEQ
 @2
 D=A
@@ -148,7 +198,7 @@ A=M
 (mk_isnt_1)
 
 D=D-1
-@isnt_2            // Two case : Add 4
+@mk_isnt_2            // Two case : Add 4
 D;JEQ
 @4
 D=A
@@ -161,7 +211,7 @@ A=M
 (mk_isnt_2)
 
 D=D-1
-@isnt_3            // Three case : Add 8
+@mk_isnt_3            // Three case : Add 8
 D;JEQ
 @8
 D=A
