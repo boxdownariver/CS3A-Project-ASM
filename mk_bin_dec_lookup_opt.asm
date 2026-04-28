@@ -156,11 +156,11 @@ D;JEQ              // Jump if 15
 @mk_decBuffer
 D=M
 @10
-D=D-A
+D=D+A
 @mk_lookup_m_floater
 M=D
-
-
+@mx_lookup_12486
+0;JMP
 (mk_m3_return)
 // DO m4 Match
 @mk_lookup_opt_return
@@ -171,6 +171,7 @@ A=M
 // Needs mk_lookup_12486_return, mk_lookup_m_floater.
 // Set mk_lookup_m_floater to the address of the location on M.
 // Set mk_lookup_12486_return to your return location.
+// !!! What is mk_lookup_iterator????
 (mk_lookup_12486)  // Switch / Match statemest
 @mk_lookup_iterator
 D=M
