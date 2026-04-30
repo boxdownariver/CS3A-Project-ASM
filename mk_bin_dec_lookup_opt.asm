@@ -172,6 +172,24 @@ M=D
 0;JMP
 (mk_m3_return)
 // DO m4 Match
+@mk_mx_x           // Increment x
+M=M+1
+@mk_lookup_opt_return // Can return to bin_dec from here!
+D=M
+@mk_mx_return
+M=D
+@mk_bin_dec_iter   // Set lookup index to bin_dec_iter
+D=M
+@mk_lookup_index
+M=D                // ^^ (index)
+@14                // If less than 14, 0. If 14, 1. If greater than 14, sub 3.
+D=D-A
+@mk_mx_set_0
+D;JLT              // ^^ (<14)
+@mk_mx_set_1
+D;JEQ              // ^^ (=14)
+@mk_mx_sub_3
+D;JGT              // ^^ (>14)
 @mk_lookup_opt_return
 A=M
 0;JMP
