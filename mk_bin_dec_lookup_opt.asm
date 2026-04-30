@@ -1,6 +1,7 @@
 //
 // UNFINISHED! TODO: complete lookup table
-//
+// Are we looping through M or just doing M? it would be more efficient to simply "do" M here, wouldn't it?
+// This would require carry over from 0 to 1 to 2 to 3 to 4...
 //
 (mk_lookup_opt)
 // DO m0 Match
