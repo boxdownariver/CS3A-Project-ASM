@@ -20,7 +20,7 @@ D;JNE
 D=A
 @mk_decBuffer                // decBuffer is a pointer
 A=M
-M=M-D                        // ^^
+M=M-D                        // ^^ (subtract 8)
 @mk_m0_return                // Skip to end of m0
 0;JMP                        // ^^^ (if R15)
 (mk_lookup_m0_while)         // subtract 4, if greater than zero, go again. then add 4 back.
