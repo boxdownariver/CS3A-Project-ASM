@@ -18,7 +18,7 @@ D=M-D                // Because we work in D and not M, lookup_index isn't yet m
 D;JNE
 @8                   // Subtract 8
 D=A
-@mk_decBuffer
+@mk_decBuffer           ///!! Bad logic?
 M=M-D
 @mk_m0_return        // Skip to end of m0
 0;JMP                // ^^^ (if R15)
@@ -135,6 +135,10 @@ D=D-1;JEQ          // Jump if 14
 D-1;JEQ            // Jump if 15
 (mk_m2_return)
 // DO m3 Match
+@mk_bin_dec_iter   // Set lookup index
+D=M
+@mk_lookup_index
+M=D                // ^^ (index)
 @mk_mx_x           // Setup x for mk_mx
 M=M+1
 @mk_m3_return      // Setup return for mk_mx and mk_lookup_12486
@@ -143,16 +147,20 @@ D=A
 M=D                // ^^ (mk_mx)
 @mk_lookup_12486_return
 M=D                // ^^ (mk_lookup_12486)
-@mk_lookup_index   // Begin index check: 0, 15. 10-14 are handled by mk_lookup_12486.
+@mk_lookup_index   // Begin index check: <10, 15. 10-14 are handled by mk_lookup_12486.
 D=M
 @10
 D=D-A
 @mk_mx_set_0
-D;JEQ              // Jump if 0
+D;JLT              // Jump if <10
 @5
 D=D-A
 @mk_mx_sub_2
 D;JEQ              // Jump if 15
+@10                // set lookup_index -10
+D=A
+@mk_lookup_index
+M=M-D              // ^^ (set lookup_index)
 @mk_decBuffer
 D=M
 @10
@@ -172,8 +180,10 @@ A=M
 // Set mk_lookup_m_floater to the address of the location on M.
 // Set mk_lookup_12486_return to your return location.
 // !!! What is mk_lookup_iterator????
+// mk_lookup_iterator can be 0, 1, 2, 3 or 4... Probably where it is expected from 0 (subtract however much you need)
+/// !! iterator is likely referencing index
 (mk_lookup_12486)  // Switch / Match statemest
-@mk_lookup_iterator
+@mk_lookup_index         /// !! Used to be mk_lookup_iterator
 D=M
 @mk_isnt_0            // Zero case : Add 1
 D;JEQ
