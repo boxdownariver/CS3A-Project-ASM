@@ -1,3 +1,10 @@
+// ======================================================
+// File: main.asm
+// Description:
+//    Control loop for keyboad inputs. This program reads
+//    an input, updates a buffer, and performs actions 
+//    based on specific keys based on user input.
+//    
 include(`definitions.asm')
 
 @buffer_size       // Buffer size for external (RXX) buffer
