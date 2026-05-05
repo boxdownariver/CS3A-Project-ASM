@@ -4,17 +4,6 @@
 // mk_getKey, mk_addBuf, mk_delBuf, mk_clearBuf can be handled here. Would be best to give mk_processBuf its own file.
 // Processing "enter" should call mk_processBuf.
 
-// mk_getKey : read from keyboard, return ASCII code
-(mk_getKey)
-@KBD
-D=M
-@mk_getKey
-D;JEQ
-@mk_getKey_output
-M=D
-@mk_getKey_return
-0;JMP
-
 // mk_addBuf : add number to buffer.
 (mk_addBuf)
 @16                // Exit early if buffer full
