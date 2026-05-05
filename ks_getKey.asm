@@ -1,5 +1,29 @@
-// Runs an infinite loop that listens to the keyboard input. 
-// When a 0,1 c, q, enter, or backspace are input, return input key to program
+// ks_getKey
+// Gets key from keyboard input from user
+// Stores the valid key into a variable, 0, 1, c, q, ENTER, or BACKSPACE
+// Returns valid key back to main 
+// ********** Variables **************
+// KBD 	      : Predetermined variable name for keyboard input. If KBD = 0, no key has been pressed.
+// tempKey 	  : Copy of key pressed, in case key is immediately released.
+// currentKey : Storage of valid key, returned to main.
+// return	  : Return pointer, set to an area in the program that the function comes back to after finishing.
+// ********** Labels *****************
+// GETKEY_LOOP 	 : Main loop of the function, handles both invalid (keeps looping) and valid cases. Forks to a VALID_KEY label in the latter case.
+// VALID_KEY	 : Handles when valid key is pressed. Copies tempKey to currentKey, then proceeds to return.
+// DEBOUNCE_LOOP : Handles the special implementation aspect of getKey. The KBD needs to be debounced. I.e. if the user holds down a key,
+// the program only takes a single copy of it, ignoring the rest of the inputs. Similarly, if the entire program runs fast enough
+// such that it takes two or more inputs from the keyboard when the user intended to only press a key once, only one input will be recorded.
+// ********** PRECONDITIONS **********
+//
+//
+// ********** OUTPUTS ****************
+//
+//
+//
+// ********** TODO *******************
+// Are all functions documented with a description, inputs/precondictions, and
+outputs/effects?
+// Are key actions documents (e.g. input, conversion, leading zero suppression)?
 
 	// 0, 1, c, q, enter, backspace
 	// 0 = 48
@@ -16,10 +40,10 @@
     @KBD
     D=M
     @GETKEY_LOOP
-    D;JEQ         // No key pressed
+    D;JEQ           // No key pressed
 	
 	@tempKey	
-	M=D			  // Copy key
+	M=D			    // Copy key
 
 	@tempKey
 	D=M
@@ -85,3 +109,4 @@
 	@return
 	A=M
 	0;JMP			// Return
+	
