@@ -14,81 +14,77 @@
 // the program only takes a single copy of it, ignoring the rest of the inputs. Similarly, if the entire program runs fast enough
 // such that it takes two or more inputs from the keyboard when the user intended to only press a key once, only one input will be recorded.
 // ********** PRECONDITIONS **********
-//
-//
+// No inputs, all keyboard inputs are handled within the function. However, the program relies on an outside loop if all 16 bits are being grabbed.
 // ********** OUTPUTS ****************
-//
-//
-//
-// ********** TODO *******************
-// Are all functions documented with a description, inputs/precondictions, and
-outputs/effects?
-// Are key actions documents (e.g. input, conversion, leading zero suppression)?
+// Outputs one variable, currentKey, which is used by the rest of the greater program. Depending on the key input, it could be stored in the buffer,
+// cause for removal from the buffer, clearing the buffer, etc.
 
+// ASCII values
 	// 0, 1, c, q, enter, backspace
 	// 0 = 48
 	// 1 = 49
 	// c = 99
 	// q = 113
-	// C = 67
-	// Q = 81
+	// C = 67, not used
+	// Q = 81, not used
 	// enter = 128
 	// backspace = 129
 
 (GETKEY_LOOP)
 
+// Query keyboard
     @KBD
     D=M
     @GETKEY_LOOP
-    D;JEQ           // No key pressed
+    D;JEQ           // If no key pressed, loop back to beginning
 	
 	@tempKey	
 	M=D			    // Copy key
 
 	@tempKey
 	D=M
-	@48
+	@48				// ASCII '0'
 	D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = '0', jump to VALID_KEY
 	
     @tempKey
     D=M
-    @49
+    @49				// ASCII '1'
     D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = '1', jump to VALID_KEY
 	
 	@tempKey
 	D=M
-	@99
+	@99				// ASCII 'c'
 	D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = 'c', jump to VALID_KEY
 	
 	@tempKey
 	D=M
-	@113
+	@113			// ASCII 'q'
 	D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = 'q', jump to VALID_KEY
 	
 	@tempKey
 	D=M
-	@128
+	@128			// ASCII 'ENTER'
 	D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = 'ENTER', jump to VALID_KEY
 	
 	@tempKey
 	D=M
-	@129
+	@129			// ASCII 'BACKSPACE'
 	D=D-A
     @VALID_KEY
 	D;JEQ			// If keyboard input = 'BACKSPACE', jump to VALID_KEY
 	
 	@GETKEY_LOOP
-	0;JMP
+	0;JMP			// Else, loop back to beginning
 	
 (VALID_KEY)
 
@@ -108,5 +104,5 @@ outputs/effects?
 	
 	@return
 	A=M
-	0;JMP			// Return
+	0;JMP			// Return pointer back to main
 	
