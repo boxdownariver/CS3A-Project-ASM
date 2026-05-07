@@ -1,20 +1,20 @@
 include(`definitions.asm')
-//***********************************************************************************************
+//*****************************************************************************************************
 //
 // mk_bin_dec : Convert binary representation of a number to BCD representation.
-//_______________________________________________________________________________________________
+//_____________________________________________________________________________________________________
 //
 // Inputs     : R0 through R15      -> Binary representation array
 // Outputs    : mk_decBuffer        -> BCD representation array
 //              mk_bin_dec_negative -> Whether the representation should be prepended with '-'
-//_______________________________________________________________________________________________
+//_____________________________________________________________________________________________________
 //
 // Process    : First, execute mk_bin_bin. This produces a single-number version of the binary
 //              array. If the output of bin_bin is negative, then turn it positive and use the
 //              "negative output" signal. Then, loop, dividing that number by 10, adding the
 //              remainder to the output, and using the quotient as that number for the next loop.
 //              Exit loop when the quotient reaches 0.
-//_______________________________________________________________________________________________
+//_____________________________________________________________________________________________________
 //
 // Pseudocode :
 //
@@ -34,7 +34,7 @@ include(`definitions.asm')
 // } while (divide_quotient != 0);
 // return;
 //
-//***********************************************************************************************
+//*****************************************************************************************************
 
 (mk_bin_dec)
 @mk_decBuffer

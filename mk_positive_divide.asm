@@ -1,20 +1,21 @@
-//**************************************************
+//*****************************************************************************************************
 //
-// mk_positive_divide : Divide dividend by divisor
-//__________________________________________________
+// mk_positive_divide : Divide positive dividend by positive divisor
+//_____________________________________________________________________________________________________
 //
-// Inputs  : mk_divide_dividend, mk_divide_divisor
-// Outputs : mk_divide_quotient, mk_divide_remainder
-//__________________________________________________
+// Inputs  : mk_divide_dividend  -> The number to divide.
+//           mk_divide_divisor   -> The number to divide by.
+// Outputs : mk_divide_quotient  -> The output of the division.
+//           mk_divide_remainder -> What remains of the dividend after division.
+//_____________________________________________________________________________________________________
 //
-// This program divides a positive dividend by a
-// positive divisor, by subtracting the divisor
-// from the dividend until negative, adding
-// 1 * divisor back into the dividend, and taking
-// the iteration count as the quotient and the
-// remaining value of the dividend as the remainder.
-//__________________________________________________
-// pseudocode :
+// Process : Subtract the divisor from the dividend until negative, then add 1 * divisor back into the
+//           dividend, and take the iteration count as the quotient and the remaining value of the
+//           dividend as the remainder. (Remainder can be used in place of dividend for the duration
+//           of the program, and mutated as such)
+//_____________________________________________________________________________________________________
+//
+// Pseudocode :
 //
 // remainder = dividend;
 // for (quotient = 0; remainder >= 0; ++quotient) {
@@ -24,7 +25,7 @@
 // remainder += divisor;
 // return;
 //
-//**************************************************
+//*****************************************************************************************************
 
 (mk_positive_divide)
 @mk_divide_quotient          // Initialize quotient to 0
