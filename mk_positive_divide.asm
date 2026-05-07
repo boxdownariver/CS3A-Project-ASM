@@ -1,3 +1,31 @@
+//**************************************************
+//
+// mk_positive_divide
+//__________________________________________________
+//
+// Inputs  : mk_divide_dividend, mk_divide_divisor
+// Outputs : mk_divide_quotient, mk_divide_remainder
+//__________________________________________________
+//
+// This program divides a positive dividend by a
+// positive divisor, by subtracting the divisor
+// from the dividend until negative, adding
+// 1 * divisor back into the dividend, and taking
+// the iteration count as the quotient and the
+// remaining value of the dividend as the remainder.
+//__________________________________________________
+// pseudocode:
+//
+// remainder = dividend;
+// for (quotient = 0; remainder >= 0; ++quotient) {
+//   remainder -= divisor;
+// }
+// --quotient;
+// remainder += divisor;
+// return;
+//
+//**************************************************
+
 (mk_positive_divide)
 @mk_divide_quotient          // Initialize quotient to 0
 M=0
