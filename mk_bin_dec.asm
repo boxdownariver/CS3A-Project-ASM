@@ -10,7 +10,33 @@ M=D
 @mk_decBuffer_size
 M=0
 
-(mk_bin_dec)                 // Enter conversion
+(mk_bin_dec)
+// Divide by 10 until 0, appending to decBuffer in reverse
+// Use R to append to decBuffer, and Q to go through next loop
+// If 0 before all of decBuffer is filled, then shift to end and prepend zeros? Maybe not needed.
+// If input negative, then turn positive and add negative sign
+// Outputs: decBuffer, negative.
+mk_bin_bin()
+@mk_bin_bin_out            // Retrieve output for first run
+D=M
+@mk_bin_dec_negative       // Negative sign absent by default
+M=0
+@mk_bin_dec_not_negative   // If negative, turn positive and add negative sign. Skip if positive
+D;JGE
+@mk_bin_bin_out
+MD=-D
+@mk_bin_dec_negative
+M=1
+(mk_bin_dec_not_negative)
+(mk_bin_dec_div_loop)
+@mk_divide_dividend
+M=D
+
+@mk_bin_dec_return
+A=M
+0;JMP
+
+(mk_bin_dec_old)                 // Enter conversion
 mk_execute_twocomp(mk_bin_dec_2c)
 @R15
 D=M
