@@ -14,7 +14,7 @@
 // the program only takes a single copy of it, ignoring the rest of the inputs. Similarly, if the entire program runs fast enough
 // such that it takes two or more inputs from the keyboard when the user intended to only press a key once, only one input will be recorded.
 // ********** PRECONDITIONS **********
-// No inputs, all keyboard inputs are handled within the function.
+// No inputs, all keyboard inputs are handled within the function. However, the program relies on an outside loop if all 16 bits are being grabbed.
 // ********** OUTPUTS ****************
 // Outputs one variable, currentKey, which is used by the rest of the greater program. Depending on the key input, it could be stored in the buffer,
 // cause for removal from the buffer, clearing the buffer, etc.
