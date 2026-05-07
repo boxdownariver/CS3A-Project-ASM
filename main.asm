@@ -2,11 +2,18 @@
 // File: main.asm
 // Description:
 //    Control loop for keyboad inputs. This program reads
-//    an input, updates a buffer, and performs actions 
+//    an input, updates a buffer, and performs actions
 //    based on specific keys based on user input.
-//    
+//
 include(`definitions.asm')
 
+// Decimal number virtual buffer
+@10000
+D=A
+@mk_decBuffer
+M=D
+@mk_decBuffer_size
+M=0
 @buffer_size       // Buffer size for external (RXX) buffer
 M=0
 

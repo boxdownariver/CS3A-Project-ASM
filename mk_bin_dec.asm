@@ -1,21 +1,13 @@
 include(`definitions.asm')
 // Binary to Decimal conversion using virtual slots
 // Should also make a GE style conversion using division... basically, double dabble.
-
-// Decimal number virtual buffer
-@10000
-D=A
-@mk_decBuffer
-M=D
-@mk_decBuffer_size
-M=0
-
-(mk_bin_dec)
 // Divide by 10 until 0, appending to decBuffer in reverse
 // Use R to append to decBuffer, and Q to go through next loop
 // If 0 before all of decBuffer is filled, then shift to end and prepend zeros? Maybe not needed.
 // If input negative, then turn positive and add negative sign
 // Outputs: decBuffer, negative.
+
+(mk_bin_dec)
 @mk_decBuffer
 D=M
 @mk_decBuffer_it
@@ -46,6 +38,8 @@ D=M
 @mk_decBuffer_it
 AM=M+1                       // ^^ (Go to next decBuffer location)
 M=D                          // ^^ (Put remainder into decBuffer. We start 1 index back so that this works after going to the next location.)
+@mk_decBuffer_size
+M=M+1
 @mk_divide_quotient          // Use quotient in next division if nonzero; exit if zero
 D=M                          // Used for loop comparison AND for future divisions
 @mk_bin_dec_div_loop         // ^^ (Division / remainder loop)
