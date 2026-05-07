@@ -20,7 +20,7 @@ M=0
 D=M
 @mk_decBuffer_it
 M=D-1                      // Start back one so that iterator can be increased on each read/write
-mk_bin_bin()
+mk_execute_bin_bin(back2dec)
 @mk_bin_bin_out            // Retrieve output for first run
 D=M
 @mk_bin_dec_negative       // Negative sign absent by default

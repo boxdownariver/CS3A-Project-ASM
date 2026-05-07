@@ -103,3 +103,12 @@ D;JNE              // ^^
 0;JMP
 ($1)               // Return location ^^^'
 )dnl
+define(`mk_execute_bin_bin',
+`@$1               // Set return location
+D=A
+@mk_bin_bin_return
+M=D
+@mk_bin_bin        // Run bin_bin
+0;JMP
+($1)               // Return location ^^^'
+)dnl
