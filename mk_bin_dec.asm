@@ -76,3 +76,6 @@ D;JNE                        // Keep looping as long as there are divisions to b
 @mk_bin_dec_return           // Function Return
 A=M
 0;JMP                        // ^^
+
+include(`mk_bin_bin.asm')
+include(`mk_positive_divide.asm')
