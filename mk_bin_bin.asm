@@ -1,8 +1,28 @@
 // ****************************************************************************************************
+//
 // mk_bin_bin : Take R0 through R15, and convert to one binary number (bin_bin_out)
+//_____________________________________________________________________________________________________
+//
 // Inputs     : Rn for 0 through 15.
 // Outputs    : mk_bin_bin_out -> Single number representing binary series R.
+//_____________________________________________________________________________________________________
+//
 // Process    : Loop through R, and add the corresponding power of 2 to bin_bin_out when Rn is nonzero.
+//_____________________________________________________________________________________________________
+//
+// Pseudocode :
+//
+// two_power =   1;          // Two to the zero
+// pointer   = &R0;
+// out       =   0;
+// for (iterator = 0; iterator <= 15; ++iterator) { // Could shorten by doing iterator 15 -> 0
+//   if (!*pointer) {
+//     out += two_power;
+//   }
+//   ++pointer;
+//   two_power += two_power; // Double... multiplying by 2
+// }
+//
 // ****************************************************************************************************
 (mk_bin_bin)
 @mk_two_power         // Instantiate two's power to 1 (two to the zero)
