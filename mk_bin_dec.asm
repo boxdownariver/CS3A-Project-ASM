@@ -16,6 +16,10 @@ M=0
 // If 0 before all of decBuffer is filled, then shift to end and prepend zeros? Maybe not needed.
 // If input negative, then turn positive and add negative sign
 // Outputs: decBuffer, negative.
+@mk_decBuffer
+D=M
+@mk_decBuffer_it
+M=D-1                      // Start back one so that iterator can be increased on each read/write
 mk_bin_bin()
 @mk_bin_bin_out            // Retrieve output for first run
 D=M
@@ -28,10 +32,24 @@ MD=-D
 @mk_bin_dec_negative
 M=1
 (mk_bin_dec_not_negative)
-(mk_bin_dec_div_loop)
+(mk_bin_dec_div_loop)      // Division and remainder extraction loop
 @mk_divide_dividend
 M=D
-
+@10
+D=A
+@mk_divide_divisor
+M=D
+@mk_positive_divide
+0;JMP
+@mk_divide_remainder
+D=M
+@mk_decBuffer_it
+AM=M+1
+M=D
+@mk_divide_quotient
+D=M                          // Used for loop comparison AND for future divisions
+@mk_bin_dec_div_loop         // ^^ (Division / remainder loop)
+D;JNE                        // Keep looping as long as there are divisions to be made
 @mk_bin_dec_return
 A=M
 0;JMP
