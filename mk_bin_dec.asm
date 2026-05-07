@@ -1,11 +1,40 @@
 include(`definitions.asm')
-// Binary to Decimal conversion using virtual slots
-// Should also make a GE style conversion using division... basically, double dabble.
-// Divide by 10 until 0, appending to decBuffer in reverse
-// Use R to append to decBuffer, and Q to go through next loop
-// If 0 before all of decBuffer is filled, then shift to end and prepend zeros? Maybe not needed.
-// If input negative, then turn positive and add negative sign
-// Outputs: decBuffer, negative.
+//***********************************************************************************************
+//
+// mk_bin_dec : Convert binary representation of a number to BCD representation.
+//_______________________________________________________________________________________________
+//
+// Inputs     : R0 through R15      -> Binary representation array
+// Outputs    : mk_decBuffer        -> BCD representation array
+//              mk_bin_dec_negative -> Whether the representation should be prepended with '-'
+//_______________________________________________________________________________________________
+//
+// Process    : First, execute mk_bin_bin. This produces a single-number version of the binary
+//              array. If the output of bin_bin is negative, then turn it positive and use the
+//              "negative output" signal. Then, loop, dividing that number by 10, adding the
+//              remainder to the output, and using the quotient as that number for the next loop.
+//              Exit loop when the quotient reaches 0.
+//_______________________________________________________________________________________________
+//
+// Pseudocode :
+//
+// negative     = 0;
+// decBuffer_it = decBuffer - 1;       // Starting back one allows the increment of decBuffer to
+//                                     // be combined with its access
+// mk_bin_bin();                       // Outputs bin_bin_out
+// if (!(bin_bin_out >= 0)) {
+//   negative = 1;
+//   bin_bin_out = -bin_bin_out;
+// }
+// dividend = bin_bin_out;
+// do {
+//   mk_positive_divide(dividend, 10); // Outputs divide_remainder and divide_quotient
+//   *(decBuffer_it++) = divide_remainder;
+//   dividend = divide_quotient;
+// } while (divide_quotient != 0);
+// return;
+//
+//***********************************************************************************************
 
 (mk_bin_dec)
 @mk_decBuffer

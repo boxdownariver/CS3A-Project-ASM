@@ -1,6 +1,6 @@
 //**************************************************
 //
-// mk_positive_divide
+// mk_positive_divide : Divide dividend by divisor
 //__________________________________________________
 //
 // Inputs  : mk_divide_dividend, mk_divide_divisor
@@ -14,7 +14,7 @@
 // the iteration count as the quotient and the
 // remaining value of the dividend as the remainder.
 //__________________________________________________
-// pseudocode:
+// pseudocode :
 //
 // remainder = dividend;
 // for (quotient = 0; remainder >= 0; ++quotient) {
