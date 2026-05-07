@@ -15,12 +15,12 @@
 // two_power =   1;          // Two to the zero
 // pointer   = &R0;
 // out       =   0;
-// for (iterator = 0; iterator <= 15; ++iterator) { // Could shorten by doing iterator 15 -> 0
+// for (iterator = 16; iterator > 0; --iterator) { // Runs 16 times
 //   if (!*pointer) {
 //     out += two_power;
 //   }
 //   ++pointer;
-//   two_power += two_power; // Double... multiplying by 2
+//   two_power += two_power; // Double... multiplying by 2. This depends greatly on overflow
 // }
 //
 // ****************************************************************************************************
@@ -32,8 +32,10 @@ M=1
 D=A
 @mk_bin_bin_pointer
 M=D                   // ^^ (Instantiate pointer to R0)
-@mk_bin_bin_iterator  // Instantiate iterator to 0
-M=0
+@16
+D=A
+@mk_bin_bin_iterator  // Instantiate iterator to 16
+M=D
 @mk_bin_bin_out       // Instantiate bin_bin_out to 0
 M=0
 (mk_bin_bin_loop)     // Loop: add two's power if Rn is nonzero, then increase two's power and check n+1
@@ -52,13 +54,11 @@ M=M+1
 @mk_two_power         // Double two's power (increase the power)
 D=M
 M=M+D                 // ^^ (Double two's power)
-@15                   // Check if iterator is 15 yet; increment iterator
-D=A
-@mk_bin_bin_iterator
-D=D-M                 // Subtract iterator from 15 (check if 15)
-M=M+1                 // ^^ (Increment iterator)
+@mk_bin_bin_iterator  // Iterator is 16 -> 0
+D=M
+M=M-1                 // ^^ (Decrement iterator)
 @mk_bin_bin_loop
-D;JGT                 // Once iterator is 15, quit loop
+D;JNE                 // Once iterator is 0, quit loop
 @mk_bin_bin_return    // Return
 A=M
 0;JMP                 // ^^ (Return)
